@@ -118,3 +118,33 @@ class Universal_simulation:
         gluDeleteQuadric(quadric)
         glPopMatrix()
 
+    def get_color(self, temperature):
+        if temperature > 15000:
+            r = (temperature) / 20000
+            g = (temperature) / 20000
+            b = (temperature - 5000) / 15000
+        elif temperature > 10000:
+            r = (temperature) / 20000
+            g = (temperature) / 20000
+            b = 0
+        elif temperature > 5000:
+            r = (temperature) / 20000
+            g = 0.0#(temperature) / 40000
+            b = 0.05
+        else:
+            r = temperature / 5000
+            g = temperature / 5000
+            b = 1.0
+        return r, g, b
+
+    def get_material_properties(self, temperature):
+        if temperature > 5000:
+            ambient = [0.2, 0.2, 0.2, 1.0]
+            diffuse = [1.0, 1.0, 1.0, 1.0]
+            specular = [1.0, 1.0, 1.0, 1.0]
+        else:
+            ambient = [0.2, 0.2, 0.2, 1.0]
+            diffuse = [0.8, 0.8, 0.8, 1.0]
+            specular = [1.0, 1.0, 1.0, 1.0]
+        return ambient, diffuse, specular
+
