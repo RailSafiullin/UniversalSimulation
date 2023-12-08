@@ -3,3 +3,15 @@ This is an application for simulating the universal
 Window and universal parameters are set via input fields
 
 To start the application, click the "Start" button
+
+Use the keypad buttons to move through the star field
+
+To move up, press the W button
+To move down, press the S button
+To move to the left, press the A button
+To move to the right, press the D button
+
+To zoom in, press the UP button
+To zoom out, press the Down button
+To turn left, press the Left button
+To turn right, press the Right button
