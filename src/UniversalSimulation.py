@@ -24,16 +24,6 @@ class Universal_simulation:
         z_min, z_max = z_range
         size_min, size_max = size_range
 
-        # Создание звезд и добавление их в список
-        for i in range(star_count):
-            new_star = Star(
-                random.uniform(x_min, x_max),
-                random.uniform(y_min, y_max),
-                random.uniform(z_min, z_max),
-                random.uniform(size_min, size_max)
-            )
-            self.stars.append(new_star)
-
         for i in range(star_count):
             new_star = Star(
                 random.uniform(x_min, x_max),
@@ -59,6 +49,8 @@ class Universal_simulation:
                 self.draw(star)
             
             self.update_stars_size()
+            self.handle_keys()
+
             pygame.display.flip()
             clock.tick(60)
     
@@ -76,6 +68,43 @@ class Universal_simulation:
         glEnable(GL_LIGHTING)
         glEnable(GL_LIGHT0)
         glEnable(GL_COLOR_MATERIAL)
+
+    def handle_keys(self):
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_UP]:
+            self.perspective[3][2] += 5
+        elif keys[pygame.K_DOWN]:
+            self.perspective[3][2] -= 5
+        
+        elif keys[pygame.K_LEFT]:
+            angle = np.radians(1)
+            rotation = np.array([
+                [np.cos(angle), 0, np.sin(angle), 0],
+                [0, 1, 0, 0],
+                [-np.sin(angle), 0, np.cos(angle), 0],
+                [0, 0, 0, 1]
+            ])
+            self.perspective = np.dot(rotation, self.perspective)
+        elif keys[pygame.K_RIGHT]:
+            angle = np.radians(-1)
+            rotation = np.array([
+                [np.cos(angle), 0, np.sin(angle), 0],
+                [0, 1, 0, 0],
+                [-np.sin(angle), 0, np.cos(angle), 0],
+                [0, 0, 0, 1]
+            ])
+            self.perspective = np.dot(rotation, self.perspective)
+
+        elif keys[pygame.K_w]:
+            self.perspective[3][1] -= 5
+        elif keys[pygame.K_s]:
+            self.perspective[3][1] += 5
+        elif keys[pygame.K_d]:
+            self.perspective[3][0] -= 5
+        elif keys[pygame.K_a]:
+            self.perspective[3][0] += 5
+
 
     def draw(self, star):
         glLoadIdentity()

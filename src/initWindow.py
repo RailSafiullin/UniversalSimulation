@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from UniversalSimulation import Universal_simulation
 
+
 class InitWindow:
     def __init__(self, help='', version=''):
         self.__init_window = tk.Tk()
@@ -21,8 +22,7 @@ class InitWindow:
             "z_max": {"value": 500, "label": "Максимальное значение z"},
             "size_min": {"value": 0.1, "label": "Минимальный размер"},
             "size_max": {"value": 2.0, "label": "Максимальный размер"}
-        }
-
+        }  
         self.__create_widgets()
 
     def __create_widgets(self):
@@ -51,7 +51,6 @@ class InitWindow:
         label_version.grid(row=row, column=2, ipadx=6, ipady=6, padx=4, pady=4)
 
     def __start_simulation(self):
-
         star_count = int(self.variables["star_count"]["entry"].get())
         size_min = float(self.variables["size_min"]["entry"].get())
         size_max = float(self.variables["size_max"]["entry"].get())
@@ -68,10 +67,8 @@ class InitWindow:
                             (z_min, z_max),
                             (size_min, size_max))
         simulation.run()
-
         #self.__init_window.destroy()
 
-        
     def __show_help(self):
         messagebox.showinfo("Справка", self.__help_text)
 
