@@ -1,0 +1,5 @@
+This is an application for simulating the universal
+
+Window and universal parameters are set via input fields
+
+To start the application, click the "Start" button
