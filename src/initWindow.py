@@ -11,7 +11,18 @@ class InitWindow:
         self.__version_text = version
         self.__help_text = help
 
-        self.variables = {}
+        self.variables = {
+            "star_count": {"value": 200, "label": "Количество звезд"},
+            "x_min": {"value": -800, "label": "Минимальное значение x"},
+            "x_max": {"value": 800, "label": "Максимальное значение x"},
+            "y_min": {"value": -500, "label": "Минимальное значение y"},
+            "y_max": {"value": 500, "label": "Максимальное значение y"},
+            "z_min": {"value": -500, "label": "Минимальное значение z"},
+            "z_max": {"value": 500, "label": "Максимальное значение z"},
+            "size_min": {"value": 0.1, "label": "Минимальный размер"},
+            "size_max": {"value": 2.0, "label": "Максимальный размер"}
+        }
+
         self.__create_widgets()
 
     def __create_widgets(self):
@@ -41,9 +52,24 @@ class InitWindow:
 
     def __start_simulation(self):
 
-        app = Universal_simulation()
-        app.run()
-        self.__init_window.destroy()
+        star_count = int(self.variables["star_count"]["entry"].get())
+        size_min = float(self.variables["size_min"]["entry"].get())
+        size_max = float(self.variables["size_max"]["entry"].get())
+        x_min = int(self.variables["x_min"]["entry"].get())
+        x_max = int(self.variables["x_max"]["entry"].get())
+        y_min = int(self.variables["y_min"]["entry"].get())
+        y_max = int(self.variables["y_max"]["entry"].get())
+        z_min = int(self.variables["z_min"]["entry"].get())
+        z_max = int(self.variables["z_max"]["entry"].get())
+
+        simulation = Universal_simulation(star_count, 
+                            (x_min, x_max), 
+                            (y_min, y_max), 
+                            (z_min, z_max),
+                            (size_min, size_max))
+        simulation.run()
+
+        #self.__init_window.destroy()
 
         
     def __show_help(self):

@@ -8,16 +8,31 @@ import time
 
 
 class Universal_simulation:
-    def __init__(self):
+    def __init__(self, 
+                star_count = 200, 
+                x_range = (-800, 800),
+                y_range = (-500, 500), 
+                z_range = (-500, 500), 
+                size_range = (0.1, 2.0)):
+
         self.WINDOW_SIZE = (1400, 750)
         self.perspective = np.identity(4)
         self.stars = []
 
-        star_count = 200
-        x_min, x_max = -800, 800
-        y_min, y_max = -500, 500
-        z_min, z_max = -500, 500 
-        size_min, size_max = 0.1, 2.0
+        x_min, x_max = x_range
+        y_min, y_max = y_range
+        z_min, z_max = z_range
+        size_min, size_max = size_range
+
+        # Создание звезд и добавление их в список
+        for i in range(star_count):
+            new_star = Star(
+                random.uniform(x_min, x_max),
+                random.uniform(y_min, y_max),
+                random.uniform(z_min, z_max),
+                random.uniform(size_min, size_max)
+            )
+            self.stars.append(new_star)
 
         for i in range(star_count):
             new_star = Star(
@@ -43,8 +58,13 @@ class Universal_simulation:
             for star in self.stars:
                 self.draw(star)
             
+            self.update_stars_size()
             pygame.display.flip()
             clock.tick(60)
+    
+    def update_stars_size(self):
+        for star in self.stars:
+            star.update_size()
 
     def init(self):
         glClearColor(0.1, 0.1, 0.1, 1.0)
@@ -63,7 +83,7 @@ class Universal_simulation:
         glPushMatrix()
         glTranslatef(star.x, star.y, star.z)
 
-        glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, [1.0, 1.0, 0.0, 1.0])
+        glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, [1.0, 1.0, 0.0, 1.0]) 
 
         quadric = gluNewQuadric()
         gluSphere(quadric, star.size, 32, 32)
