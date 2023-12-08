@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-
+from UniversalSimulation import Universal_simulation
 
 class InitWindow:
     def __init__(self, help='', version=''):
@@ -11,11 +11,7 @@ class InitWindow:
         self.__version_text = version
         self.__help_text = help
 
-        self.variables = {
-
-        }
-
-        
+        self.variables = {}
         self.__create_widgets()
 
     def __create_widgets(self):
@@ -45,6 +41,8 @@ class InitWindow:
 
     def __start_simulation(self):
 
+        app = Universal_simulation()
+        app.run()
         self.__init_window.destroy()
 
         
