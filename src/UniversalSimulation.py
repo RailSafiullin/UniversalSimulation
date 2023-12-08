@@ -18,7 +18,6 @@ class Universal_simulation:
         self.WINDOW_SIZE = (1400, 750)
         self.perspective = np.identity(4)
         self.stars = []
-
         x_min, x_max = x_range
         y_min, y_max = y_range
         z_min, z_max = z_range
