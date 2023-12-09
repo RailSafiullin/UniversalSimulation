@@ -9,7 +9,7 @@
 
 - [How to install](#how-to-install-and-start)
 
-- [Task 3](#task-3)
+- [Task 21](#task-21)
 
 - [License](#license)
 
